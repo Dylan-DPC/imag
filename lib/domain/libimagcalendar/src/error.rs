@@ -17,21 +17,18 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 //
 
-#[macro_use] extern crate error_chain;
-#[macro_use] extern crate log;
-extern crate toml;
-extern crate toml_query;
-extern crate vobject;
+error_chain! {
+    types {
+        CalendarError, CalendarErrorKind, ResultExt, Result;
+    }
 
-extern crate libimagentrylink;
-extern crate libimagentryref;
-extern crate libimagentryutil;
-extern crate libimagerror;
-extern crate libimagstore;
+    links {
+        StoreError(::libimagstore::error::StoreError, ::libimagstore::error::StoreErrorKind);
+        LinkError(::libimagentrylink::error::LinkError, ::libimagentrylink::error::LinkErrorKind);
+    }
 
-pub mod calendar;
-pub mod collection;
-pub mod entry;
-pub mod error;
-pub mod store;
+    errors {
+    }
+}
+
 

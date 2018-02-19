@@ -17,21 +17,33 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 //
 
-#[macro_use] extern crate error_chain;
-#[macro_use] extern crate log;
-extern crate toml;
-extern crate toml_query;
-extern crate vobject;
+use std::path::Path;
 
-extern crate libimagentrylink;
-extern crate libimagentryref;
-extern crate libimagentryutil;
-extern crate libimagerror;
-extern crate libimagstore;
+use libimagstore::store::FileLockEntry;
+use libimagstore::store::Store;
 
-pub mod calendar;
-pub mod collection;
-pub mod entry;
-pub mod error;
-pub mod store;
+use error::Result;
+use store::CalendarCRUD;
 
+/// A interface to the store which offers CRUD functionality for calendar entries
+pub struct CalendarEntryStore<'a>(&'a Store);
+
+impl<'a> CalendarCRUD<'a> for CalendarEntryStore<'a> {
+
+    fn get(&self, hash: String) -> Result<Option<FileLockEntry<'a>>> {
+        unimplemented!()
+    }
+
+    fn create<P: AsRef<Path>>(&self, p: P) -> Result<FileLockEntry<'a>> {
+        unimplemented!()
+    }
+
+    fn retrieve<P: AsRef<Path>>(&self, p: P) -> Result<FileLockEntry<'a>> {
+        unimplemented!()
+    }
+
+    fn delete_by_hash(&self, hash: String) -> Result<()> {
+        unimplemented!()
+    }
+
+}
